@@ -65,12 +65,13 @@ d3.csv("omzet.csv", function(error, data) {
       .call(d3.axisLeft(y));
 
   // Add a small label for the graph name.
-  var key1 = "omzet"
+  
   chart1.append("text")
-      .attr("x", width - 6)
-      .attr("y", height - 6)
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text(function(d) { return d.key1 });
+      .text("omzet x 1.000 euro");
 });
 	
 // Adds the chart2 canvas          
