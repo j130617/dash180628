@@ -66,12 +66,9 @@ d3.csv("omzet.csv", function(error, data) {
 
   // Add a small label for the graph name.
   
-  chart1.append("text")
-      .attr("transform", "rotate(-0)")
-      .attr("y", 6)
-      .attr("dy", "3.71em")
-      .style("text-anchor", "end")
-      .text("Omzet x € 1.000");
+   g.append("text")
+      .text("Omzet x €1.000")
+      .attr("y", -8);
 });
 	
 // Adds the chart2 canvas          
