@@ -12,7 +12,7 @@
 <script>
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 70, right: 20, bottom: 30, left: 50},
+var margin = {top: 10, right: 20, bottom: 30, left: 50},
     width = 500 - margin.left - margin.right,
     height = 275 - margin.top - margin.bottom;
 
@@ -67,8 +67,8 @@ d3.csv("omzet.csv", function(error, data) {
   // Add a small label for the graph name.
   chart1.append("text")
       .attr("class", "title")
-      .attr("x", 20)
-      .attr("y", 20)
+      .attr("x", 10)
+      .attr("y", 10)
       .text("Omzet x €1.000");  
    
 });
