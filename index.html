@@ -32,28 +32,28 @@ var chart1 = d3.select("body").append("svg")
 	  "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("data1.csv", function(error, data) {
+d3.csv("omzet.csv", function(error, data) {
   if (error) throw error;
   
   // format the data
   data.forEach(function(d) {
-    d.close = +d.close;
+    d.eur = +d.eur;
   });
 	
 
   // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.close; })]);	
+  x.domain(data.map(function(d) { return d.jaar; }));
+  y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
 
   // append the rectangles for the bar chart
   chart1.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.date); })
+      .attr("x", function(d) { return x(d.jaar); })
       .attr("width", x.bandwidth())
-      .attr("y", function(d) { return y(d.close); })
-      .attr("height", function(d) { return height - y(d.close); });
+      .attr("y", function(d) { return y(d.eur); })
+      .attr("height", function(d) { return height - y(d.eur); });
   
   // add the x Axis
   chart1.append("g")
