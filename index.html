@@ -70,7 +70,7 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("x", 10)
       .attr("y", 10)
       .style("text-anchor", "start")
-      .style("font-size", 10)
+      .style("font-size", 8)
       .text("Omzet x €1.000");  
    
 });
@@ -114,11 +114,12 @@ d3.csv("winst.csv", function(error, data) {
       .call(d3.axisLeft(y));
   
   chart2.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Winst x € 1.000");
+      .attr("class", "title")
+      .attr("x", 10)
+      .attr("y", 10)
+      .style("text-anchor", "start")
+      .style("font-size", 8)
+      .text("Winst x €1.000");  
 });
 	
 </script>
