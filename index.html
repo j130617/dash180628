@@ -67,11 +67,11 @@ d3.csv("omzet.csv", function(error, data) {
   // Add a small label for the graph name.
   chart1.append("text")
       .attr("class", "title")
-      .attr("x", 10)
+      .attr("x", 15)
       .attr("y", 10)
       .style("text-anchor", "start")
-      .style("font-size", 8)
-      .text("Omzet x €1.000");  
+      .style("font-size", 6)
+      .text("omzet x €1.000");  
    
 });
 	
@@ -115,11 +115,11 @@ d3.csv("winst.csv", function(error, data) {
   
   chart2.append("text")
       .attr("class", "title")
-      .attr("x", 10)
+      .attr("x", 15)
       .attr("y", 10)
       .style("text-anchor", "start")
-      .style("font-size", 8)
-      .text("Winst x €1.000");  
+      .style("font-size", 6)
+      .text("winst x €1.000");  
 });
 	
 </script>
