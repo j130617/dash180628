@@ -111,6 +111,13 @@ d3.csv("winst.csv", function(error, data) {
   // add the y Axis
   chart2.append("g")
       .call(d3.axisLeft(y));
+  
+  chart2.append("text")
+      .attr("transform", "rotate(-45)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Winst x € 1.000");
 });
 	
 </script>
