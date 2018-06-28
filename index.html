@@ -67,7 +67,7 @@ d3.csv("omzet.csv", function(error, data) {
   // Add a small label for the graph name.
   
    chart1.append("text")
-      .style("text-anchor", "end")
+      .style("text-anchor")
       .attr("y", 2)
       .text("Omzet x €1.000");
 });
