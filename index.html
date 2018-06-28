@@ -63,6 +63,14 @@ d3.csv("omzet.csv", function(error, data) {
   // add the y Axis
   chart1.append("g")
       .call(d3.axisLeft(y));
+
+  // Add a small label for the graph name.
+  var key1 = "omzet"
+  chart1.append("text")
+      .attr("x", width - 6)
+      .attr("y", height - 6)
+      .style("text-anchor", "end")
+      .text(function(d) { return d.key1 });
 });
 	
 // Adds the chart2 canvas          
