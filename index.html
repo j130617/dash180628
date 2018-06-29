@@ -97,11 +97,13 @@ d3.csv("omzet.csv", function(error, data) {
   
   // add the xB Axis
   chartOmzet.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xb));
   
   // add the yB Axis
   chartOmzet.append("g")
+      .attr("class", "axis")  
       .call(d3.axisLeft(yb));
 
   // Add a small label for the graph name.
@@ -145,12 +147,16 @@ d3.csv("winst.csv", function(error, data) {
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.eur); })
       .attr("height", function(d) { return height - y(d.eur); });
+  
   // add the x Axis
   chartWinst.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
+  
   // add the y Axis
   chartWinst.append("g")
+      .attr("class", "axis")
       .call(d3.axisLeft(y));
   
   chartWinst.append("text")
@@ -196,11 +202,13 @@ d3.csv("kosten.csv", function(error, data) {
   
   // add the x Axis
   chartKosten.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
   chartKosten.append("g")
+      .attr("class", "axis")
       .call(d3.axisLeft(y));
 
   // Add a small label for the graph name.
@@ -245,12 +253,13 @@ d3.csv("omzetgroei.csv", function(d) {
   
   // add the x Axis
   chartOmzetgroei.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
   chartOmzetgroei.append("g")
-      .attr("class", "axis axis--y")
+      .attr("class", "axis")
       .call(d3.axisLeft(y).ticks(10, "%"))
 
 
@@ -294,6 +303,7 @@ d3.csv("winstgroei.csv", function(d) {
   
   // add the x Axis
   chartWinstgroei.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
@@ -346,11 +356,13 @@ d3.csv("omzet.csv", function(error, data) {
   
   // add the x Axis
   chart5.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
   chart5.append("g")
+      .attr("class", "axis")
       .call(d3.axisLeft(y));
 
   // Add a small label for the graph name.
@@ -398,11 +410,13 @@ d3.csv("omzet.csv", function(error, data) {
   
   // add the x Axis
   chart6.append("g")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
   chart6.append("g")
+      .attr("class", "axis")
       .call(d3.axisLeft(y));
 
   // Add a small label for the graph name.
