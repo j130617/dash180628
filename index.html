@@ -449,10 +449,10 @@ d3.csv("stocks.csv", function(error, data) {
     // set the colour scale
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    // legendSpace = width/dataNest.length; // spacing for the legend */
+    legendSpace = width/dataNest.length; // spacing for the legend */
     
     // Loop through each symbol / key
-    dataNest.forEach(function(d) { 
+    dataNest.forEach(function(d,i) { 
 
         linechart.append("path")
             .attr("class", "line")
@@ -461,22 +461,22 @@ d3.csv("stocks.csv", function(error, data) {
             .attr("d", priceline(d.values));
         
 	// Add the Legend ORIGINEEL
-        //linechart.append("text")
-            //.attr("x", (legendSpace/2)+i*legendSpace)  // space legend
-            //.attr("y", height + (margin.bottom/2)+ 5)
-            //.attr("class", "legend")    // style the legend
-            //.style("fill", function() { // Add the colours dynamically
-                //return d.color = color(d.key); })
-            //.text(d.key); 
-	 
-	 // Add the Legend AANGEPAST
-	 linechart.append("text")
-            .attr("x", 15+i*10)  // space legend
-            .attr("y", 10)
+        linechart.append("text")
+            .attr("x", (legendSpace/2)+i*legendSpace)  // space legend
+            .attr("y", height + (margin.bottom/2)+ 5)
             .attr("class", "legend")    // style the legend
             .style("fill", function() { // Add the colours dynamically
                 return d.color = color(d.key); })
             .text(d.key); 
+	 
+	 // Add the Legend AANGEPAST
+	 //linechart.append("text")
+            //.attr("x", 15) // +i*10)  // space legend
+            //.attr("y", 10)
+            //.attr("class", "legend")    // style the legend
+            //.style("fill", function() { // Add the colours dynamically
+                //return d.color = color(d.key); })
+            //.text(d.key); 
     });
 
     // Add the X Axis
