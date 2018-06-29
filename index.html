@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style> /* set the CSS */
+
 body { font: 12px Arial;}
 
 path { 
@@ -56,10 +57,12 @@ var x = d3.scaleBand()
 var y = d3.scaleLinear()
         .range([height, 0]);
 
-var xl = d3.scaleTime().range([0, width]);  
-var yl = d3.scaleLinear().range([height, 0]);
+var xl = d3.scaleTime()
+	.range([0, width]);  
+var yl = d3.scaleLinear()
+	.range([height, 0]);
 	
-// Adds the chart1 canvas          
+// Adds the chartOmzet canvas          
 var chartOmzet = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -419,7 +422,7 @@ var priceline = d3.line()
     .y(function(d) { return yl(d.price); });
     
 // Adds the chartline2 canvas
-var chartline2 = d3.select("body")
+var linechart = d3.select("body")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -430,8 +433,8 @@ var chartline2 = d3.select("body")
 // Get the data
 d3.csv("stocks.csv", function(error, data) {
     data.forEach(function(d) {
-		d.date = parseDate(d.date);
-		d.price = +d.price;
+	d.date = parseDate(d.date);
+	d.price = +d.price;
     });
 
     // Scale the range of the data
@@ -446,35 +449,35 @@ d3.csv("stocks.csv", function(error, data) {
     // set the colour scale
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    legendSpace = width/dataNest.length; // spacing for the legend
+    /* legendSpace = width/dataNest.length; // spacing for the legend */
     
     // Loop through each symbol / key
     dataNest.forEach(function(d) { 
 
-        chartline2.append("path")
+        linechart.append("path")
             .attr("class", "line")
 	    .style("stroke", function() { // Add the colours dynamically
                 return d.color = color(d.key); })
             .attr("d", priceline(d.values));
         
 	// Add the Legend
-        chartline2.append("text")
-            .attr("x", (legendSpace/2)+i*legendSpace)  // space legend
-            .attr("y", height + (margin.bottom/2)+ 5)
-            .attr("class", "legend")    // style the legend
-            .style("fill", function() { // Add the colours dynamically
-                return d.color = color(d.key); })
-            .text(d.key); 
+        //linechart.append("text")
+            //.attr("x", (legendSpace/2)+i*legendSpace)  // space legend
+            //.attr("y", height + (margin.bottom/2)+ 5)
+            //.attr("class", "legend")    // style the legend
+            //.style("fill", function() { // Add the colours dynamically
+                //return d.color = color(d.key); })
+            //.text(d.key); 
     });
 
     // Add the X Axis
-    chartline2.append("g")
+    linechart.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xl));
 
     // Add the Y Axis
-    chartline2.append("g")
+    linechart.append("g")
       .attr("class", "axis")
       .call(d3.axisLeft(yl));
 
