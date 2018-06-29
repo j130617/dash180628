@@ -309,8 +309,9 @@ d3.csv("winstgroei.csv", function(d) {
   
   // add the y Axis
   chartWinstgroei.append("g")
-      .attr("class", "axis axis--y")
+      .attr("class", "axis")  
       .call(d3.axisLeft(y).ticks(10, "%"))
+  
   // Add a small label for the graph name.
   chartWinstgroei.append("text")
       .attr("class", "title")
@@ -496,8 +497,8 @@ d3.csv("stocks.csv", function(error, data) {
       .attr("class", "axis")
       .call(d3.axisLeft(yl));
   
-  // Add a small label for the graph name.
-  linechart.append("text")
+    // Add a small label for the graph name.
+    linechart.append("text")
       .attr("class", "title")
       .attr("x", 15)
       .attr("y", 10)
