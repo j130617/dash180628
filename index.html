@@ -132,14 +132,14 @@ var chart3 = d3.select("body").append("svg")
 	  "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("winst.csv", function(d) {
-  d.eur = +d.eur;
+d3.csv("omzetgroei.csv", function(d) {
+  d.procent = +d.procent;
   return d;
 }, function(error, data) {
   if (error) throw error;
 
   x.domain(data.map(function(d) { return d.jaar; }));
-  y.domain([0, d3.max(data, function(d) { return d.eur; })]);
+  y.domain([0, d3.max(data, function(d) { return d.procent; })]);
 
 	
   // append the rectangles for the bar chart
@@ -149,8 +149,8 @@ d3.csv("winst.csv", function(d) {
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.jaar); })
       .attr("width", x.bandwidth())
-      .attr("y", function(d) { return y(d.eur); })
-      .attr("height", function(d) { return height - y(d.eur); });
+      .attr("y", function(d) { return y(d.procent); })
+      .attr("height", function(d) { return height - y(d.procent); });
   
   // add the x Axis
   chart3.append("g")
