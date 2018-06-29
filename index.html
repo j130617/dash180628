@@ -463,7 +463,7 @@ d3.csv("stocks.csv", function(error, data) {
 	// Add the Legend ORIGINEEL
         linechart.append("text")
             .attr("x", (legendSpace/2)+i*legendSpace)  // space legend
-            .attr("y", height + (margin.bottom/2)+ 5)
+            .attr("y", height + (margin.bottom/2)+ 15)
             .attr("class", "legend")    // style the legend
             .style("fill", function() { // Add the colours dynamically
                 return d.color = color(d.key); })
