@@ -25,7 +25,7 @@ var y = d3.scaleLinear()
 
 
 // Adds the chart1 canvas          
-var chart1 = d3.select("body").append("svg")
+var chartOmzet = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -48,7 +48,7 @@ d3.csv("omzet.csv", function(error, data) {
   y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
 
   // append the rectangles for the bar chart
-  chart1.selectAll(".bar")
+  chartOmzet.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
@@ -58,16 +58,16 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("height", function(d) { return height - y(d.eur); });
   
   // add the x Axis
-  chart1.append("g")
+  chartOmzet.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
-  chart1.append("g")
+  chartOmzet.append("g")
       .call(d3.axisLeft(y));
 
   // Add a small label for the graph name.
-  chart1.append("text")
+  chartOmzet.append("text")
       .attr("class", "title")
       .attr("x", 15)
       .attr("y", 10)
@@ -78,7 +78,7 @@ d3.csv("omzet.csv", function(error, data) {
 });
 	
 // Adds the chart2 canvas          
-var chart2 = d3.select("body").append("svg")
+var chartWinst = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -99,7 +99,7 @@ d3.csv("winst.csv", function(error, data) {
   y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
 
   // append the rectangles for the bar chart
-  chart2.selectAll(".bar")
+  chartWinst.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
@@ -108,14 +108,14 @@ d3.csv("winst.csv", function(error, data) {
       .attr("y", function(d) { return y(d.eur); })
       .attr("height", function(d) { return height - y(d.eur); });
   // add the x Axis
-  chart2.append("g")
+  chartWinst.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   // add the y Axis
-  chart2.append("g")
+  chartWinst.append("g")
       .call(d3.axisLeft(y));
   
-  chart2.append("text")
+  chartWinst.append("text")
       .attr("class", "title")
       .attr("x", 15)
       .attr("y", 10)
@@ -125,7 +125,7 @@ d3.csv("winst.csv", function(error, data) {
 });
 
 // Adds the chart4 canvas          
-var chart4 = d3.select("body").append("svg")
+var chartKosten = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -147,7 +147,7 @@ d3.csv("kosten.csv", function(error, data) {
   y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
 
   // append the rectangles for the bar chart
-  chart4.selectAll(".bar")
+  chartKosten.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
@@ -157,16 +157,16 @@ d3.csv("kosten.csv", function(error, data) {
       .attr("height", function(d) { return height - y(d.eur); });
   
   // add the x Axis
-  chart4.append("g")
+  chartKosten.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
-  chart4.append("g")
+  chartKosten.append("g")
       .call(d3.axisLeft(y));
 
   // Add a small label for the graph name.
-  chart4.append("text")
+  chartKosten.append("text")
       .attr("class", "title")
       .attr("x", 15)
       .attr("y", 10)
@@ -177,7 +177,7 @@ d3.csv("kosten.csv", function(error, data) {
 });
 
 // Adds the chart3 canvas (MET PERCENTAGES OP DE Y-AS)      
-var chart3 = d3.select("body").append("svg")
+var chartOmzetgroei = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -196,7 +196,7 @@ d3.csv("omzetgroei.csv", function(d) {
 
 	
   // append the rectangles for the bar chart
-  chart3.selectAll(".bar")
+  chartOmzetgroei.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
@@ -206,18 +206,18 @@ d3.csv("omzetgroei.csv", function(d) {
       .attr("height", function(d) { return height - y(d.procent); });
   
   // add the x Axis
-  chart3.append("g")
+  chartOmzetgroei.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
   // add the y Axis
-  chart3.append("g")
+  chartOmzetgroei.append("g")
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y).ticks(10, "%"))
 
 
   // Add a small label for the graph name.
-  chart3.append("text")
+  chartOmzetgroei.append("text")
       .attr("class", "title")
       .attr("x", 15)
       .attr("y", 10)
@@ -227,7 +227,51 @@ d3.csv("omzetgroei.csv", function(d) {
    
 });
 	
-
+// Adds the chart3 canvas (MET PERCENTAGES OP DE Y-AS)      
+var chartWinstgroei = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+	  "translate(" + margin.left + "," + margin.top + ")");
+// Get the data
+d3.csv("winstgroei.csv", function(d) {
+  d.procent = +d.procent;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+  x.domain(data.map(function(d) { return d.jaar; }));
+  y.domain([0, d3.max(data, function(d) { return d.procent; })]);
+	
+  // append the rectangles for the bar chart
+  chartWinstgroei.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.jaar); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.procent); })
+      .attr("height", function(d) { return height - y(d.procent); });
+  
+  // add the x Axis
+  chartWinstgroei.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+  
+  // add the y Axis
+  chartWinstgroei.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).ticks(10, "%"))
+  // Add a small label for the graph name.
+  chartWinstgroei.append("text")
+      .attr("class", "title")
+      .attr("x", 15)
+      .attr("y", 10)
+      .style("text-anchor", "start")
+      .style("font-size", 10)
+      .text("WINSTGROEI");  
+   
+});
 	
 	// Adds the chart5 canvas          
 var chart5 = d3.select("body").append("svg")
