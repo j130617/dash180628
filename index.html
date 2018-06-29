@@ -124,6 +124,58 @@ d3.csv("winst.csv", function(error, data) {
       .text("WINST (mln €)");  
 });
 
+// Adds the chart4 canvas          
+var chart4 = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+	  "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("kosten.csv", function(error, data) {
+  if (error) throw error;
+  
+  // format the data
+  data.forEach(function(d) {
+    d.eur = +d.eur;
+  });
+	
+
+  // Scale the range of the data in the domains
+  x.domain(data.map(function(d) { return d.jaar; }));
+  y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
+
+  // append the rectangles for the bar chart
+  chart4.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.jaar); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.eur); })
+      .attr("height", function(d) { return height - y(d.eur); });
+  
+  // add the x Axis
+  chart4.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+  
+  // add the y Axis
+  chart4.append("g")
+      .call(d3.axisLeft(y));
+
+  // Add a small label for the graph name.
+  chart4.append("text")
+      .attr("class", "title")
+      .attr("x", 15)
+      .attr("y", 10)
+      .style("text-anchor", "start")
+      .style("font-size", 10)
+      .text("BEDRIJFSKOSTEN (mln €)");  
+   
+});
+
 // Adds the chart3 canvas (MET PERCENTAGES OP DE Y-AS)      
 var chart3 = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -175,57 +227,7 @@ d3.csv("omzetgroei.csv", function(d) {
    
 });
 	
-	// Adds the chart4 canvas          
-var chart4 = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-	  "translate(" + margin.left + "," + margin.top + ")");
 
-// Get the data
-d3.csv("omzet.csv", function(error, data) {
-  if (error) throw error;
-  
-  // format the data
-  data.forEach(function(d) {
-    d.eur = +d.eur;
-  });
-	
-
-  // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.jaar; }));
-  y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
-
-  // append the rectangles for the bar chart
-  chart4.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.jaar); })
-      .attr("width", x.bandwidth())
-      .attr("y", function(d) { return y(d.eur); })
-      .attr("height", function(d) { return height - y(d.eur); });
-  
-  // add the x Axis
-  chart4.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-  
-  // add the y Axis
-  chart4.append("g")
-      .call(d3.axisLeft(y));
-
-  // Add a small label for the graph name.
-  chart4.append("text")
-      .attr("class", "title")
-      .attr("x", 15)
-      .attr("y", 10)
-      .style("text-anchor", "start")
-      .style("font-size", 10)
-      .text("OMZET (mln €)");  
-   
-});
 	
 	// Adds the chart5 canvas          
 var chart5 = d3.select("body").append("svg")
