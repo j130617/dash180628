@@ -3,7 +3,8 @@
 <style> /* set the CSS */
 
 .bar { fill: steelblue; }
-
+.bar:hover { fill: brown; }
+	
 </style>
 <body>
 	
@@ -122,6 +123,7 @@ d3.csv("winst.csv", function(error, data) {
       .text("WINST (mln €)");  
 });
 // Adds the chart3 canvas          
+
 var chart3 = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -130,19 +132,16 @@ var chart3 = d3.select("body").append("svg")
 	  "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("omzet.csv", function(error, data) {
+d3.csv("winst.csv", function(d) {
+  d.eur = +d.eur;
+  return d;
+}, function(error, data) {
   if (error) throw error;
-  
-  // format the data
-  data.forEach(function(d) {
-    d.eur = +d.eur;
-  });
-	
 
-  // Scale the range of the data in the domains
   x.domain(data.map(function(d) { return d.jaar; }));
-  y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
+  y.domain([0, d3.max(data, function(d) { return d.eur; })]);
 
+	
   // append the rectangles for the bar chart
   chart3.selectAll(".bar")
       .data(data)
@@ -160,7 +159,9 @@ d3.csv("omzet.csv", function(error, data) {
   
   // add the y Axis
   chart3.append("g")
-      .call(d3.axisLeft(y));
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).ticks(10, "%"))
+
 
   // Add a small label for the graph name.
   chart3.append("text")
@@ -169,7 +170,7 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("y", 10)
       .style("text-anchor", "start")
       .style("font-size", 10)
-      .text("OMZET (mln €)");  
+      .text("WINSTGROEI");  
    
 });
 	
