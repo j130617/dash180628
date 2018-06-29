@@ -96,7 +96,7 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("y", function(d) { return y(d.eur); })
       .attr("height", function(d) { return height - y(d.eur); })
       .on('mouseover', tip.show)
-      .on('mouseout', tip.hide);
+      .on('mouseout', tip.hide)
   
   // add the x Axis
   chart1.append("g")
