@@ -122,8 +122,8 @@ d3.csv("winst.csv", function(error, data) {
       .style("font-size", 10)
       .text("WINST (mln €)");  
 });
-// Adds the chart3 canvas          
 
+// Adds the chart3 canvas (MET PERCENTAGES OP DE Y-AS)      
 var chart3 = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -160,7 +160,7 @@ d3.csv("winst.csv", function(d) {
   // add the y Axis
   chart3.append("g")
       .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y).ticks(10, "%"))
+      .call(d3.axisLeft(y).ticks(5, "%"))
 
 
   // Add a small label for the graph name.
