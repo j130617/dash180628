@@ -64,8 +64,8 @@ d3.csv("omzet.csv", function(error, data) {
 	
 
   // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.jaar; }));
-  y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
+  xB.domain(data.map(function(d) { return d.jaar; }));
+  yB.domain([0, d3.max(data, function(d) { return d.eur; })]);	
 
   // append the rectangles for the bar chart
   chartOmzet.selectAll(".bar")
@@ -77,12 +77,12 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("yB", function(d) { return y(d.eur); })
       .attr("height", function(d) { return height - y(d.eur); });
   
-  // add the x Axis
+  // add the xB Axis
   chartOmzet.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xB));
   
-  // add the y Axis
+  // add the yB Axis
   chartOmzet.append("g")
       .call(d3.axisLeft(yB));
 
