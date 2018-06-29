@@ -4,7 +4,36 @@
 
 .bar { fill: steelblue; }
 .bar:hover { fill: brown; }
-	
+
+/* Tooltip code */ 
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
 </style>
 <body>
 	
@@ -24,6 +53,13 @@ var x = d3.scaleBand()
 var y = d3.scaleLinear()
           .range([height, 0]);
 
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<span style='color:brown'>" + d.eur + "</span>";
+  })
+
 // Adds the chart1 canvas          
 var chart1 = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -32,6 +68,9 @@ var chart1 = d3.select("body").append("svg")
     .attr("transform", 
 	  "translate(" + margin.left + "," + margin.top + ")");
 
+//NIET VERGETEN//
+chart1.call(tip);
+	
 // Get the data
 d3.csv("omzet.csv", function(error, data) {
   if (error) throw error;
@@ -54,7 +93,9 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("x", function(d) { return x(d.jaar); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.eur); })
-      .attr("height", function(d) { return height - y(d.eur); });
+      .attr("height", function(d) { return height - y(d.eur); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
   
   // add the x Axis
   chart1.append("g")
