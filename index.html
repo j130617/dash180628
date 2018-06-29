@@ -72,10 +72,10 @@ d3.csv("omzet.csv", function(error, data) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("xB", function(d) { return x(d.jaar); })
-      .attr("width", x.bandwidth())
-      .attr("yB", function(d) { return y(d.eur); })
-      .attr("height", function(d) { return height - y(d.eur); });
+      .attr("xB", function(d) { return xB(d.jaar); })
+      .attr("width", xB.bandwidth())
+      .attr("yB", function(d) { return yB(d.eur); })
+      .attr("height", function(d) { return height - yB(d.eur); });
   
   // add the xB Axis
   chartOmzet.append("g")
@@ -93,7 +93,7 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("yB", 10)
       .style("text-anchor", "start")
       .style("font-size", 10)
-      .text("CHECK X3 OMZET (mln €)");  
+      .text("CHECK X4 OMZET (mln €)");  
    
 });
 	
