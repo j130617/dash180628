@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style> /* set the CSS */
+body { font: 12px Arial;}
+
 path { 
     stroke: steelblue;
     stroke-width: 2;
-    fill: none;}
+    fill: none;
+}
 
 .axis path,
 .axis line {
     fill: none;
     stroke: grey;
     stroke-width: 1;
-    shape-rendering: crispEdges;}
+    shape-rendering: crispEdges;
+}
+
+.legend {
+    font-size: 12px;
+    font-weight: bold;
+    text-anchor: middle;
+}
 
 .bar { fill: steelblue; }
 
@@ -408,7 +418,7 @@ var priceline = d3.line()
     .x(function(d) { return xl(d.date); })
     .y(function(d) { return yl(d.price); });
     
-// Adds the svg canvas
+// Adds the chartline2 canvas
 var chartline2 = d3.select("body")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -432,14 +442,29 @@ d3.csv("stocks.csv", function(error, data) {
     var dataNest = d3.nest()
         .key(function(d) {return d.symbol;})
         .entries(data);
+    
+    // set the colour scale
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
 
+    legendSpace = width/dataNest.length; // spacing for the legend
+    
     // Loop through each symbol / key
     dataNest.forEach(function(d) { 
 
         chartline2.append("path")
             .attr("class", "line")
+	    .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
             .attr("d", priceline(d.values));
-
+        
+	// Add the Legend
+        chartline2.append("text")
+            .attr("x", (legendSpace/2)+i*legendSpace)  // space legend
+            .attr("y", height + (margin.bottom/2)+ 5)
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .text(d.key); 
     });
 
     // Add the X Axis
