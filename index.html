@@ -449,7 +449,7 @@ d3.csv("stocks.csv", function(error, data) {
     // set the colour scale
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    legendSpace = width/dataNest.length; // spacing for the legend */
+    var legendSpace = width/dataNest.length; // spacing for the legend */
     
     // Loop through each symbol / key
     dataNest.forEach(function(d) { 
