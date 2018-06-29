@@ -98,7 +98,7 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("y", 10)
       .style("text-anchor", "start")
       .style("font-size", 10)
-      .text("CHECK X5 OMZET (mln €)");  
+      .text("OMZET (mln €)");  
    
 });
 	
@@ -453,6 +453,59 @@ d3.csv("omzet.csv", function(error, data) {
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", line);
+});
+	
+	
+// Define the line
+var priceline = d3.line()	
+    .x(function(d) { return xl(d.date); })
+    .y(function(d) { return yl(d.price); });
+    
+// Adds the svg canvas
+var chartline2 = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("stocks.csv", function(error, data) {
+    data.forEach(function(d) {
+		d.date = parseDate(d.date);
+		d.price = +d.price;
+    });
+
+    // Scale the range of the data
+    xl.domain(d3.extent(data, function(d) { return d.date; }));
+    yl.domain([0, d3.max(data, function(d) { return d.price; })]);
+
+    // Nest the entries by symbol
+    var dataNest = d3.nest()
+        .key(function(d) {return d.symbol;})
+        .entries(data);
+
+    // Loop through each symbol / key
+    dataNest.forEach(function(d) { 
+
+        chartline2.append("path")
+            .attr("class", "line")
+            .attr("d", priceline(d.values));
+
+    });
+
+    // Add the X Axis
+    chartline2.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xl));
+
+    // Add the Y Axis
+    chartline2.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(yl));
+
 });
 </script>
 </body>
