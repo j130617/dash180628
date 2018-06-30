@@ -566,22 +566,36 @@ d3.csv("benchmark.csv", function(d, i, columns) {
       .attr("height", function(d) { return height - ybg(d.value); })
       .attr("fill", function(d) { return zbg(d.key); });
   
+  // Add the X Axis
   barchartgrouped.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xbg0));
-  
+  // Add the Y Axis
   barchartgrouped.append("g")
       .attr("class", "axis")
-      .call(d3.axisLeft(ybg).ticks(null, "s"))
-    .append("text")
-      .attr("x", 2)
-      .attr("y", ybg(ybg.ticks().pop()) + 0.5)
-      .attr("dy", "0.32em")
-      .attr("fill", "#000")
-      .attr("font-weight", "bold")
-      .attr("text-anchor", "start")
-      .text("mln €");
+      .call(d3.axisLeft(ybg));
+  
+     // Add a small label for the graph name.
+  barchartgrouped.append("text")
+      .attr("class", "title")
+      .attr("x", 15)
+      .attr("y", 10)
+      .style("text-anchor", "start")
+      .style("font-size", 10)
+      .text("TEST (mln €)");   
+
+ // barchartgrouped.append("g")
+      //.attr("class", "axis")
+      //.call(d3.axisLeft(ybg).ticks(null, "s"))
+    //.append("text")
+      //.attr("x", 2)
+      //.attr("y", ybg(ybg.ticks().pop()) + 0.5)
+      //.attr("dy", "0.32em")
+      //.attr("fill", "#000")
+      //.attr("font-weight", "bold")
+      //.attr("text-anchor", "start")
+      //.text("mln €");
   
   var legend = barchartgrouped.append("g")
       .attr("font-family", "sans-serif")
