@@ -564,7 +564,7 @@ d3.csv("benchmark.csv", function(d, i, columns) {
       .attr("y", function(d) { return ybg(d.value); })
       .attr("width", xbg1.bandwidth())
       .attr("height", function(d) { return height - ybg(d.value); })
-      .attr("fill", function(d) { return z(d.key); });
+      .attr("fill", function(d) { return zbg(d.key); });
   
   barchartgrouped.append("g")
       .attr("class", "axis")
