@@ -414,13 +414,18 @@ d3.csv("omzet.csv", function(error, data) {
 	
 	// Adds the table canvas          
 // Get the data
-d3.csv("personeel.csv",   function(error, data) {
+d3.csv("kosten.csv", function(error, data) {
   if (error) throw error;
-	
-  data.forEach(function(d, i, columns) {
-  	for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
-  	return d;}, 
-});
+  // format the data
+  data.forEach(function(d) {
+      //d.date1 = parseTime(d.date);
+      //d.jaar1 = parseTime(d.jaar);
+      //d.jaar = +d.jaar;
+      d.functie = +d.functie;
+      //return d;
+      //d.open = +d.open;  //  <= added this for tidy house keeping
+      //d.diff = Math.round(( d.close - d.open ) * 100 ) / 100;
+  });
 	
 function tabulate(data, columns) {
     var table = d3.select("body").append("table")
