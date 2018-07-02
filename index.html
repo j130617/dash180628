@@ -604,7 +604,7 @@ d3.csv("personeel.csv", function(error, data) {
   });
 	
 function tabulate(data, columns) {
-    var table = d3.select("body").append("svg")
+    var table = d3.select("body").append("svg").append("table")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             //.attr("style", "margin-left: 360px")
