@@ -4,6 +4,7 @@
 
 body { font: 12px Arial;}
 
+/* opmaak linechart*/
 path { 
     stroke: steelblue;
     stroke-width: 2;
@@ -18,14 +19,24 @@ path {
     shape-rendering: crispEdges;
 }
 
+/*opmaak legenda*/
 .legend {
     font-size: 12px;
     font-weight: bold;
     text-anchor: middle;
 }
 
+/* opmaak barchart*/
 .bar { fill: steelblue; }
 
+/* opmaak tabel*/
+th { text-align: left; }
+th, td { padding: 1px 4px;}
+/*th, td { padding: 0 1em 0.5ex 0;}*/
+th.center, td.center { text-align: center; }
+/*th.num, td.num { text-align: center; }*/
+th.num, td.num { text-align: right; }
+	
 </style>
 <body>
 	
@@ -401,60 +412,68 @@ d3.csv("omzet.csv", function(error, data) {
    
 });
 	
-	// Adds the chart6 canvas          
-var chart6 = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-	  "translate(" + margin.left + "," + margin.top + ")");
-
+	// Adds the table canvas          
 // Get the data
-d3.csv("omzet.csv", function(error, data) {
+d3.csv("kosten.csv", function(error, data) {
   if (error) throw error;
-  
-  // format the data
+ 
+	// format the data
   data.forEach(function(d) {
-    d.eur = +d.eur;
+      //d.jaar = +d.jaar;
+      d.eur = +d.eur;
   });
 	
-
-  // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.jaar; }));
-  y.domain([0, d3.max(data, function(d) { return d.eur; })]);	
-
-  // append the rectangles for the bar chart
-  chart6.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.jaar); })
-      .attr("width", x.bandwidth())
-      .attr("y", function(d) { return y(d.eur); })
-      .attr("height", function(d) { return height - y(d.eur); });
-  
-  // add the x Axis
-  chart6.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-  
-  // add the y Axis
-  chart6.append("g")
-      .attr("class", "axis")
-      .call(d3.axisLeft(y));
-
-  // Add a small label for the graph name.
-  chart6.append("text")
-      .attr("class", "title")
-      .attr("x", 10)
-      .attr("y", 5)
-      .attr("font-weight", "bold")
-      .style("text-anchor", "start")
-      .style("font-size", 10)
-      .text("TEST (mln €)");  
-   
+function tabulate(data, columns) {
+    var table = d3.select("body").append("table")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            //.attr("style", "margin-left: 360px")
+            .style("border-collapse", "collapse")
+            .style("border", "1px grey solid"),
+        thead = table.append("thead"),
+        tbody = table.append("tbody");
+    
+	// append the header row
+    thead.append("tr")
+        .selectAll("th")
+        .data(columns)
+        .enter()
+        .append("th")
+            .text(function(column) { return column; });
+    
+	// create a row for each object in the data
+    var rows = tbody.selectAll("tr")
+        .data(data)
+        .enter()
+        .append("tr");
+    
+	// create a cell in each row for each column
+    var cells = rows.selectAll("td")
+        .data(function(row) {
+            return columns.map(function(column) {
+                return {column: column, value: row[column]};
+            });
+        })
+        .enter()
+        .append("td")
+        .attr("style", "font-family: Arial") // sets the font style
+            .html(function(d) { return d.value; });
+    
+    return table;
+}
+// render the table
+var peopleTable = tabulate(data, ["jaar", "eur"]);
+peopleTable.selectAll("tbody tr") 
+           .sort(function(a, b) {
+            //return d3.descending(a.eur, b.eur); 
+	    return d3.ascending(a.jaar, b.jaar);
+           });
+peopleTable.selectAll("thead th")
+           .text(function(column) {
+             return column.charAt(0).toUpperCase() + column.substr(1);
+           });
 });
+	
 // Adds the linechart canvas
 var linechart = d3.select("body")
     .append("svg")
