@@ -414,14 +414,12 @@ d3.csv("omzet.csv", function(error, data) {
 	
 	// Adds the table canvas          
 // Get the data
-d3.csv("kosten.csv", function(error, data) {
+d3.csv("personeel.csv", function(d, i, columns) {
+  for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
+  return d;
+}, function(error, data) {
   if (error) throw error;
- 
-	// format the data
-  data.forEach(function(d) {
-      //d.jaar = +d.jaar;
-      d.eur = +d.eur;
-  });
+});
 	
 function tabulate(data, columns) {
     var table = d3.select("body").append("table")
@@ -462,11 +460,11 @@ function tabulate(data, columns) {
     return table;
 }
 // render the table
-var peopleTable = tabulate(data, ["jaar", "eur"]);
+var peopleTable = tabulate(data, ["functie", "2011", "2012", "2013", "2014", "2015", "2016"]);
 peopleTable.selectAll("tbody tr") 
            .sort(function(a, b) {
             //return d3.descending(a.eur, b.eur); 
-	    return d3.ascending(a.jaar, b.jaar);
+	    return d3.ascending(a.functie, b.functie);
            });
 peopleTable.selectAll("thead th")
            .text(function(column) {
