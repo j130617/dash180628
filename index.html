@@ -642,7 +642,7 @@ function tabulate(data, columns) {
     return table;
 }
 // render the table
-var peopleTable = tabulate(data, ["jaar", "management", "supervisors", "agents", "overig", "totaal FTE"]);
+var peopleTable = tabulate(data, ["jaar", "management", "supervisors", "agents", "overig"]);
 peopleTable.selectAll("tbody tr") 
            .sort(function(a, b) {
             //return d3.descending(a.eur, b.eur); 
