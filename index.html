@@ -414,14 +414,14 @@ d3.csv("omzet.csv", function(error, data) {
 	
 	// Adds the table canvas          
 // Get the data
-d3.csv("kosten.csv", function(error, data) {
+d3.csv("personeel.csv", function(error, data) {
   if (error) throw error;
   // format the data
   data.forEach(function(d) {
       //d.date1 = parseTime(d.date);
       //d.jaar1 = parseTime(d.jaar);
-      //d.jaar = +d.jaar;
-      d.functie = +d.functie;
+      d.jaar = +d.jaar;
+      //d.functie = +d.functie;
       //return d;
       //d.open = +d.open;  //  <= added this for tidy house keeping
       //d.diff = Math.round(( d.close - d.open ) * 100 ) / 100;
@@ -466,11 +466,11 @@ function tabulate(data, columns) {
     return table;
 }
 // render the table
-var peopleTable = tabulate(data, ["functie", "2011", "2012", "2013", "2014", "2015", "2016"]);
+var peopleTable = tabulate(data, ["jaar", "management", "supervisors", "agents", "overig", "totaal FTE"]);
 peopleTable.selectAll("tbody tr") 
            .sort(function(a, b) {
             //return d3.descending(a.eur, b.eur); 
-	    return d3.ascending(a.functie, b.functie);
+	    return d3.ascending(a.jaar, b.jaar);
            });
 peopleTable.selectAll("thead th")
            .text(function(column) {
