@@ -431,7 +431,7 @@ var priceline = d3.line()
 // Get the data
 d3.csv("stocks.csv", function(error, data) {
     data.forEach(function(d) {
-	d.date = parseDate(d.date);
+	//d.date = parseDate(d.date);
 	d.price = +d.price;
     });
 
