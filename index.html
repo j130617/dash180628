@@ -45,8 +45,6 @@ th.num, td.num { text-align: right; }
 var margin = {top: 40, right: 50, bottom: 50, left: 75},
     width = 500 - margin.left - margin.right,
     height = 275 - margin.top - margin.bottom;
-</style>
-<body>
 
 	// Parse the date / time
 var parseDate = d3.timeParse("%b %Y");
@@ -557,7 +555,7 @@ peopleTable.selectAll("tbody tr")
 peopleTable.selectAll("thead th")
            .text(function(column) {
              return column.charAt(0).toUpperCase() + column.substr(1);
-           });
+           
 });
 		
 </script>
