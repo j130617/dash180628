@@ -72,9 +72,6 @@ var ybg = d3.scaleLinear()
     .rangeRound([height, 0]);
 var zbg = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-
-	
 	
 	//------------------------------------------------------------------>>>>> SIMPLE BAR CHART 
 	// Adds the chart canvas          
@@ -130,9 +127,6 @@ d3.csv("dso.csv", function(error, data) {
    
 });
 
-
-	
-	
 		//------------------------------------------------------------------------------->>>>> GROUPED BAR CHART MET %
 	// Adds the chartOmzetMdw to canvas
 var chartProfit = d3.select("body").append("svg")
@@ -152,7 +146,6 @@ d3.csv("profit.csv", function(d, i, columns) {
   xbg0.domain(data.map(function(d) { return d.jaar; }));
   xbg1.domain(keys).rangeRound([0, xbg0.bandwidth()]);
   ybg.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
-  
   
   chartProfit.append("g")
     .selectAll("g")
@@ -217,8 +210,6 @@ d3.csv("profit.csv", function(d, i, columns) {
   
 });
 
-	
-	
 		// --------------------------------------------------------------------------->>>> GROUPED BAR CHART GETALLEN
 // Add barchartgrouped to canvas
 var barchartgrouped = d3.select("body").append("svg")
@@ -316,11 +307,6 @@ d3.csv("benchmark.csv", function(d, i, columns) {
       .text(function(d) { return d; });
 });
 
-	
-	
-	
-	
-	
 	//--------------------------------------------------------------------------------->>>> MULTI LINE CHART 1
 	// Adds the chart canvas
 var linechart = d3.select("body")
@@ -400,11 +386,6 @@ d3.csv("stocks.csv", function(error, data) {
       .text("TEST (mln €)");  
 });
 	
-
-
-	
-	
-	
 	
 		//----------------------------------------------------------------------------------->>>> MULTI LINE CHART 2  
 // Adds the linechart canvas
@@ -479,18 +460,7 @@ d3.csv("omzet.csv", function(error, data) {
       .style("font-size", 10)
       .text("Omzet naar activiteiten (mln €)");  
 });
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	// ---------------------------------------------------------------------------------->>>> TABEL
 	// Adds the table canvas          
