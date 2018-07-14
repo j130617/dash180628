@@ -2,7 +2,6 @@
 <meta charset="utf-8">
 <style> /* set the CSS */
 body { font: 12px Arial;}
-	
 	/* opmaak linechart*/
 path { 
     stroke: steelblue;
@@ -24,7 +23,6 @@ path {
 }
 	/* opmaak barchart*/
 .bar { fill: steelblue; }
-
 	/* opmaak tabel*/
 th { text-align: left; }
 /*th, td { padding: 1px 4px;}*/
@@ -39,9 +37,8 @@ th.num, td.num { text-align: right; }
 <!-- load the d3.js library -->    	
 <script src="//d3js.org/d3.v4.min.js"></script>
 <script>
-
 	// Set the dimensions of the canvas / graph
-	//var margin = {top: 10, right: 20, bottom: 40, left: 50},//
+//var margin = {top: 10, right: 20, bottom: 40, left: 50},//
 var margin = {top: 40, right: 50, bottom: 50, left: 75},
     width = 500 - margin.left - margin.right,
     height = 275 - margin.top - margin.bottom;
@@ -73,7 +70,7 @@ var xbg1 = d3.scaleBand()
 var ybg = d3.scaleLinear()
     .rangeRound([height, 0]);
 var zbg = d3.scaleOrdinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888"]); //(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
 
 	
