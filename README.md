@@ -5,3 +5,11 @@ To do:
 
 * Legenda Test3 proberen
 * Titel kwartslag draaien
+* bullet chart
+* histogram
+* waterfall chart
+
+* Tooltip
+* Slider
+* Negatieve waarden
+* Start line een tick naar rechts
