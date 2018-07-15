@@ -352,7 +352,7 @@ d3.csv("stocks.csv", function(error, data) {
         .entries(data);
     
     	// set the colour scale
-    var color = d3.scaleOrdinal(d3.schemeCategory20); //andere categorieën: 10, 20b, 20c
+    var color = d3.scaleOrdinal(d3.schemeCategory10); //alle categorieën: 10, 20, 20b, 20c
 
     legendSpace = width/dataNest.length; // spacing for the legend */
     
@@ -429,7 +429,7 @@ d3.csv("omzet.csv", function(error, data) {
         .entries(data);
     
     // set the colour scale
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    var color = d3.scaleOrdinal(d3.schemeCategory10); //alle categorieën: 10, 20, 20b, 20c
     legendSpace = width/dataNest.length; // spacing for the legend */
     
     // Loop through each symbol / key
