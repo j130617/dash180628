@@ -477,7 +477,7 @@ d3.csv("omzet.csv", function(error, data) {
 
 		//-------------------------------------------------------------------------->>>>> GROUPED BAR CHART MET % TEST LEGENDA
 	// Adds the chartOmzetMdw to canvas
-var chartProfit = d3.select("body").append("svg")
+var chartProfit2 = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -497,7 +497,7 @@ d3.csv("profit.csv", function(d, i, columns) {
   xbg1.domain(keys).rangeRound([0, xbg0.bandwidth()]);
   ybg.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
   
-  chartProfit.append("g")
+  chartProfit2.append("g")
     .selectAll("g")
     .data(data)
     .enter().append("g")
@@ -512,18 +512,18 @@ d3.csv("profit.csv", function(d, i, columns) {
       .attr("fill", function(d) { return zbg(d.key); });
   
   	// Add the X Axis
-  chartProfit.append("g")
+  chartProfit2.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xbg0));
   
 	// Add the Y Axis
-  chartProfit.append("g")
+  chartProfit2.append("g")
       .attr("class", "axis")
       .call(d3.axisLeft(ybg).ticks(10, "%"));
   
      	// Add a small label for the graph name.
-  chartProfit.append("text")
+  chartProfit2.append("text")
       .attr("class", "title")
       .attr("x", 10)
       .attr("y", -10)
@@ -532,7 +532,7 @@ d3.csv("profit.csv", function(d, i, columns) {
       .style("font-size", 9)
       .text("Winstgevendheid");   
   
-  var legendHolder = chartProfit.append('g')
+  var legendHolder = chartProfit2.append('g')
       // translate the holder to the right side of the graph
       .attr('transform', "translate(" + (-width) + "," + (+margin.bottom*4.15) + ")")
       .attr('class','legendHolder')
