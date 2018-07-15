@@ -73,8 +73,9 @@ var xbg1 = d3.scaleBand()
     .padding(0.05);
 var ybg = d3.scaleLinear()
     .rangeRound([height, 0]);
-var zbg = d3.scaleOrdinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+var zbg = d3.scaleOrdinal(d3.schemeCategory10)
+//var zbg = d3.scaleOrdinal()
+	//.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 	
 	//------------------------------------------------------------------>>>>> SIMPLE BAR CHART 
 	// Adds the chart canvas          
@@ -400,19 +401,20 @@ d3.csv("stocks.csv", function(error, data) {
 	
 	
 		//----------------------------------------------------------------------------------->>>> MULTI LINE CHART 2  
-// Adds the linechart canvas
+	// Adds the linechart canvas
 var chartOmzet = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
     .append("g")
         .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")");
-// Define the line
+
+	// Define the line
 var omzetline = d3.line()	
     .x(function(d) { return xl(d.jaar); })
     .y(function(d) { return yl(d.omzet); });
     
-// Get the data
+	// Get the data
 d3.csv("omzet.csv", function(error, data) {
   if (error) throw error;
   data.forEach(function(d) {
@@ -471,6 +473,99 @@ d3.csv("omzet.csv", function(error, data) {
       .style("text-anchor", "start")
       .style("font-size", 9)
       .text("Omzet naar activiteiten (mln €)");  
+});
+
+		//-------------------------------------------------------------------------->>>>> GROUPED BAR CHART MET % TEST LEGENDA
+	// Adds the chartOmzetMdw to canvas
+var chartProfit = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+	  "translate(" + margin.left + "," + margin.top + ")");
+
+	// get the data //
+d3.csv("profit.csv", function(d, i, columns) {
+  for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+  var keys = data.columns.slice(1);
+	
+	// Scale the range of the data
+  xbg0.domain(data.map(function(d) { return d.jaar; }));
+  xbg1.domain(keys).rangeRound([0, xbg0.bandwidth()]);
+  ybg.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
+  
+  chartProfit.append("g")
+    .selectAll("g")
+    .data(data)
+    .enter().append("g")
+      .attr("transform", function(d) { return "translate(" + xbg0(d.jaar) + ",0)"; })
+    .selectAll("rect")
+    .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
+    .enter().append("rect")
+      .attr("x", function(d) { return xbg1(d.key); })
+      .attr("y", function(d) { return ybg(d.value); })
+      .attr("width", xbg1.bandwidth())
+      .attr("height", function(d) { return height - ybg(d.value); })
+      .attr("fill", function(d) { return zbg(d.key); });
+  
+  	// Add the X Axis
+  chartProfit.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xbg0));
+  
+	// Add the Y Axis
+  chartProfit.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(ybg).ticks(10, "%"));
+  
+     	// Add a small label for the graph name.
+  chartProfit.append("text")
+      .attr("class", "title")
+      .attr("x", 10)
+      .attr("y", -10)
+      .attr("font-weight", "bold")
+      .style("text-anchor", "start")
+      .style("font-size", 9)
+      .text("Winstgevendheid");   
+  
+  var legendHolder = chartProfit.append('g')
+      // translate the holder to the right side of the graph
+      .attr('transform', "translate(" + (-width) + "," + (+margin.bottom*4.15) + ")")
+      .attr('class','legendHolder')
+      
+  var legend = legendHolder.selectAll(".legend")
+                    //.data(keys.slice().reverse())
+  		    .data(keys.slice())
+                    .enter().append("g")
+                    .attr("class", "legend")
+                    .attr('transform', function(d, i) { return "translate(" + -40*i + "," + 0 + ")"; })
+                    .attr("width", 36)
+    
+  //legend.append("rect")
+          //.attr("x", function(d,i){return (width +(150*i)+50)})
+          //.attr("width", 12)
+          //.attr("height", 12)
+          //.style("fill", zbg);
+          
+  //legend.append("text")
+          //.attr("x", function(d,i){return (width +(150*i)+110)})
+          //.attr("y", 5)
+          //.attr("dy", ".32em")
+          //.text(function(d) { return d; });
+  
+  legend.append("text")
+            //.attr("x", (legendSpace/2)+i*legendSpace)  // space legend
+            .attr("x", function(d,i){return (width +(150*i)+110)})
+	    .attr("y", height + (margin.bottom/2)+ 15)
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { // Add the colours dynamically
+                return d.zbg = zbg(d.keys); })
+            .text(d.keys); 
+  
 });
 
 </script>
