@@ -563,8 +563,8 @@ d3.csv("profit.csv", function(d, i, columns) {
 	    .attr("y", height + (margin.bottom/2)+ 15)
             .attr("class", "legend")    // style the legend
             .style("fill", function() { // Add the colours dynamically
-                return d.zbg = zbg(d.keys); })
-            .text(d.keys); 
+                return d.zbg = zbg(d.key); })
+            .text(d.key); 
   
 });
 
