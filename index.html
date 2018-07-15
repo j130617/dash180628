@@ -118,18 +118,24 @@ d3.csv("dso.csv", function(error, data) {
       .attr("class", "axis")  
       .call(d3.axisLeft(yb));
   
-	// Add a small label for the graph name.
+	// Add a small label for the graph name VERTICAAL.
   chartDSO.append("text")
-      .attr("class", "title")
+      .attr("class", "y axis")
       .attr("transform", "rotate(-90)")
-      //.attr("x", 10)
-      //.attr("y", -10)
-      //.attr("font-weight", "bold")
       .attr("y", 6)
-      //.style("text-anchor", "start")
+      .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .style("font-size", 9)
       .text("DSO");  
+	
+	// Add a small label for the graph name HORIZONTAAL.
+  /* chartDSO.append("text")
+      .attr("class", "title")
+      .attr("x", 10)
+      .attr("y", -10)
+      .attr("font-weight", "bold")
+      .style("text-anchor", "start")
+      .style("font-size", 9)
+      .text("DSO"); */ 
    
 });
 
