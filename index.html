@@ -565,7 +565,7 @@ d3.csv("profit.csv", function(d, i, columns) {
             .style("fill", function() { // Add the colours dynamically
                 return d.zbg = zbg(d.key); })
             //.text(d.key);
-	    .text(function(d) { return d; });
+	    .text(function(d) { return d.key; });
   
 });
 
