@@ -3,8 +3,8 @@ Based on examples by d3noob http://bl.ocks.org/d3noob/5987480; https://bl.ocks.o
 
 To do:
 
-* Legenda Test3 proberen
-* Titel kwartslag draaien
+* Legenda Test proberen
+* Titel kwartslag draaien --> Done
 * bullet chart
 * histogram
 * waterfall chart
@@ -13,3 +13,4 @@ To do:
 * Slider
 * Negatieve waarden
 * Start line een tick naar rechts
+* Leganda Bar chart als Line chart  
