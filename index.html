@@ -86,8 +86,10 @@ var chartDSO = d3.select("body").append("svg")
     .attr("transform", 
 	  "translate(" + margin.left + "," + margin.top + ")");
 	// Get the data
-d3.csv("data.dso.csv", function(error, data) {
+d3.csv(src="data.dso.csv", function(error, data) {
   if (error) throw error;
+	
+	//<link rel="stylesheet" type="text/css" href="style.css">
 	  
   	// format the data
   data.forEach(function(d) {
