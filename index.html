@@ -121,15 +121,7 @@ d3.csv("dso.csv", function(error, data) {
       .attr("class", "axis")  
       .call(d3.axisLeft(yb));
   
-  chartDSO.append("text")
-      .attr("x", x.rangeBand() / 2)
-      .attr("y", function(d) { return y(d.end) + 5; })
-      .attr("dy", function(d) { return ((d.class=='negative') ? '-' : '') + ".75em" })
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "11px")
-      .attr("fill", "white")
-      .text(function(d));
-	    
+
 	// Add a small label for the graph name VERTICAAL.
   chartDSO.append("text")
       .attr("class", "y axis")
