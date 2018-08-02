@@ -590,8 +590,9 @@ d3.csv("neg.csv", function(error, data) {
 	
   	// Scale the range of the data in the domains
   xb.domain(data.map(function(d) { return d.jaar; }));
-  yb.domain([0, d3.max(data, function(d) { return d.dso; })]);	
-  
+  //yb.domain([0, d3.max(data, function(d) { return d.dso; })]);	
+  yb.domain([d3.min(data, function(d) { return d.dso; }), d3.max(data, function(d) { return d.dso; })]);
+	
 	// append the rectangles for the bar chart
   chartNeg.selectAll(".bar")
       .data(data)
