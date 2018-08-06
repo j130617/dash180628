@@ -131,29 +131,6 @@ d3.csv("dso.csv", function(error, data) {
       .style("text-anchor", "end")
       .text("DSO");  
 
-	 /* poging om labels met waarden in de bars te krijgen*/
-  chartDSO.append("text")
-      .attr("dy", ".75em")
-      .attr("y", 6)
-      .attr("x", function(d))
-      .attr("text-anchor", "middle")
-      .text(function(d));
-
-
-  /* poging om labels met waarden in de bars te krijgen*/
-	//chartDSO.append("text")
-     //.text(function(d) {
- 		//return d;
-       //})
-     //.attr("x", function(d, i) {
-	//return i * (w / dataset.length) + 5;
-       //})
-     //.attr("y", function(d) {
-	//return h - (d * 4) + 15;
-       //})
-     //.attr("font-family", "sans-serif")
-     //.attr("font-size", "11px")
-     //.attr("fill", "red");
 	
 	// Add a small label for the graph name HORIZONTAAL.
   /* chartDSO.append("text")
