@@ -135,9 +135,9 @@ d3.csv("dso.csv", function(error, data) {
   chartDSO.append("text")
       .attr("dy", ".75em")
       .attr("y", 6)
-      .attr("x", function(d) { return (x(d.x1) - x(d.x0)) / 2; })
+      .attr("x", function(d))
       .attr("text-anchor", "middle")
-      .text(function(d) { return formatCount(d.length); });
+      .text(function(d));
 
 
   /* poging om labels met waarden in de bars te krijgen*/
