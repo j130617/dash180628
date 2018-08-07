@@ -64,18 +64,6 @@ var xl = d3.scaleTime()
 	.range([0, width]);  
 var yl = d3.scaleLinear()
 	.range([height, 0]);
-
-
-	// ranges bar-line chart//
-var xl1 = d3.scaleOrdinal()
-	.range([0, width]);  
-var yl1 = d3.scaleLinear()
-	.range([height, 0]);
-var xb1 = d3.scaleOrdinal()
-        .range([0, width])
-        .padding(0.1);
-var yb1 = d3.scaleLinear()
-        .range([height, 0]);
 	
 	// ranges grouped bar chart//
 var xbg0 = d3.scaleBand()
