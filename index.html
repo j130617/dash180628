@@ -64,6 +64,18 @@ var xl = d3.scaleTime()
 	.range([0, width]);  
 var yl = d3.scaleLinear()
 	.range([height, 0]);
+
+
+	// ranges bar-line chart//
+var xl1 = d3.scaleOrdinal()
+	.range([0, width]);  
+var yl1 = d3.scaleLinear()
+	.range([height, 0]);
+var xb1 = d3.scaleOrdinal()
+        .range([0, width])
+        .padding(0.1);
+var yb1 = d3.scaleLinear()
+        .range([height, 0]);
 	
 	// ranges grouped bar chart//
 var xbg0 = d3.scaleBand()
@@ -648,8 +660,8 @@ var chartLdn = d3.select("body").append("svg")
 
 	// Define the line
 var line = d3.line()	
-    .x(function(d) { return xl(d.maand); })
-    .y(function(d) { return yl(d.meetlat); });
+    .x(function(d) { return xl1(d.maand); })
+    .y(function(d) { return yl1(d.meetlat); });
 	
 d3.csv("leden.csv", function(error, data) {
   if (error) throw error;
@@ -662,12 +674,12 @@ d3.csv("leden.csv", function(error, data) {
   });
 	
   	// Scale the range of the data in the domains
-  xb.domain(data.map(function(d) { return d.maand; }));
-  yb.domain([0, d3.max(data, function(d) { return d.leden; })]);	
+  xb1.domain(data.map(function(d) { return d.maand; }));
+  yb1.domain([0, d3.max(data, function(d) { return d.leden; })]);	
 	
     // Scale the range of the data line
-  xl.domain(d3.extent(data, function(d) { return d.maand; }));
-  yl.domain([0, d3.max(data, function(d) { return d.meetlat; })]);
+  xl1.domain(d3.extent(data, function(d) { return d.maand; }));
+  yl1.domain([0, d3.max(data, function(d) { return d.meetlat; })]);
     
         
   
@@ -676,21 +688,21 @@ d3.csv("leden.csv", function(error, data) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return xb(d.maand); })
-      .attr("width", xb.bandwidth())
+      .attr("x", function(d) { return xb1(d.maand); })
+      .attr("width", xb1.bandwidth())
       .attr("y", function(d) { return yb(d.leden); })
-      .attr("height", function(d) { return height - yb(d.leden); });
+      .attr("height", function(d) { return height - yb1(d.leden); });
   
   	// add the xB Axis
   chartLdn.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xb));
+      .call(d3.axisBottom(xb1));
   
   	// add the yB Axis
   chartLdn.append("g")
       .attr("class", "axis")  
-      .call(d3.axisLeft(yb));
+      .call(d3.axisLeft(yb1));
  
   chartLdn.append("path")
        .attr("class", "line")
@@ -702,13 +714,13 @@ d3.csv("leden.csv", function(error, data) {
     chartLdn.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xl);
+      .call(d3.axisBottom(xl1);
 
 	
     // Add the Y Axis
     chartLdn.append("g")
       .attr("class", "axis")
-      .call(d3.axisRight(yl));
+      .call(d3.axisRight(yl1));
 
 	
 	// Add a small label for the graph name VERTICAAL.
