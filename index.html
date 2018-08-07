@@ -636,7 +636,7 @@ d3.csv("neg.csv", function(error, data) {
    
 });
 
-	//------------------------------------------------------------------>>>>> SIMPLE BAR CHART 
+	//------------------------------------------------------------------>>>>> SIMPLE BAR CHART + Line
 	// Adds the chart canvas          
 var chartLdn = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -646,59 +646,82 @@ var chartLdn = d3.select("body").append("svg")
 	  "translate(" + margin.left + "," + margin.top + ")");
 	// Get the data
 
+	// Define the line
+var line = d3.line()	
+    .x(function(d) { return xl(d.maand); })
+    .y(function(d) { return yl(d.meetlat); });
+	
 d3.csv("leden.csv", function(error, data) {
   if (error) throw error;
 	
 	  
   	// format the data
   data.forEach(function(d) {
-    d.dso = +d.dso;
+    d.leden = +d.leden;
+    d.meetlat = +d.meetlat	  
   });
 	
   	// Scale the range of the data in the domains
-  xb.domain(data.map(function(d) { return d.jaar; }));
-  yb.domain([0, d3.max(data, function(d) { return d.dso; })]);	
+  xb.domain(data.map(function(d) { return d.maand; }));
+  yb.domain([0, d3.max(data, function(d) { return d.leden; })]);	
+	
+    // Scale the range of the data line
+  xl.domain(d3.extent(data, function(d) { return d.maand; }));
+  yl.domain([0, d3.max(data, function(d) { return d.meetlat; })]);
+    
+        
   
 	// append the rectangles for the bar chart
-  chartDSO.selectAll(".bar")
+  chartLdn.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return xb(d.jaar); })
+      .attr("x", function(d) { return xb(d.maand); })
       .attr("width", xb.bandwidth())
-      .attr("y", function(d) { return yb(d.dso); })
-      .attr("height", function(d) { return height - yb(d.dso); });
+      .attr("y", function(d) { return yb(d.leden); })
+      .attr("height", function(d) { return height - yb(d.leden); });
   
   	// add the xB Axis
-  chartDSO.append("g")
+  chartLdn.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xb));
   
   	// add the yB Axis
-  chartDSO.append("g")
+  chartLdn.append("g")
       .attr("class", "axis")  
       .call(d3.axisLeft(yb));
-  
-	// Add a small label for the graph name VERTICAAL.
-  chartDSO.append("text")
-      .attr("class", "y axis")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("DSO");  
+ 
+  chartLdn.append("path")
+       .attr("class", "line")
+       .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+       .attr("d", line(d.values));
+
+    // Add the X Axis
+    chartLdn.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xl)
+
 	
-	// Add a small label for the graph name HORIZONTAAL.
-  /* chartDSO.append("text")
+    // Add the Y Axis
+    chartLdn.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(yl));
+
+	
+	// Add a small label for the graph name VERTICAAL.
+  chartLdn.append("text")
       .attr("class", "title")
       .attr("x", 10)
       .attr("y", -10)
       .attr("font-weight", "bold")
       .style("text-anchor", "start")
       .style("font-size", 9)
-      .text("DSO"); */ 
-   
+      .text("Ledengroei");  
+	
+	
 });	
 </script>
 </body>
