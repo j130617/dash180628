@@ -656,17 +656,17 @@ var chartLdn = d3.select("body").append("svg")
   .append("g")
     .attr("transform", 
 	  "translate(" + margin.left + "," + margin.top + ")");
-	// Get the data
+	
 
 	// Define the line
 var line = d3.line()	
     .x(function(d) { return xl1(d.maand); })
     .y(function(d) { return yl1(d.meetlat); });
 	
+	// Get the data	
 d3.csv("leden.csv", function(error, data) {
   if (error) throw error;
-	
-	  
+		  
   	// format the data
   data.forEach(function(d) {
     d.leden = +d.leden;
@@ -706,8 +706,6 @@ d3.csv("leden.csv", function(error, data) {
  
   chartLdn.append("path")
        .attr("class", "line")
-       .style("stroke", function() { // Add the colours dynamically
-                return d.color = color(d.key); })
        .attr("d", line(d.values));
 
     // Add the X Axis
